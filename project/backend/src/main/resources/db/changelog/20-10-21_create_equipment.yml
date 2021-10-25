@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_equipment_table
+      author: Krzysztof Sękowski
+#      preConditions:
+#        - onFail: mark_ran
+#        - not:
+#            tableExists:
+#              tableName: equipment
+      changes:
+        - createTable:
+            tableName: equipment
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: conference_room_id
+                  type: BIGINT
+                  constraints:
+                    foreignKey: true
+                    referenceTableName: conference_room
+                    referenceColumnName: id
+                    foreignKeyName: fk_equipment_id
+                    validateForeignKey: true

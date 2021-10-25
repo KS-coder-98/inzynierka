@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_user_table
+      author: Krzysztof Sękowski
+      changes:
+        - createTable:
+            tableName: user_contact
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_user
+                    referencedTableName: user
+                    referencedColumnNames: id
+                    foreignKeyName: user_contact_id_fk
+                    validateForeignKey: true
+              - column:
+                  name: city
+                  type: varchar(255)
+              - column:
+                  name: street
+                  type: varchar(255)
+              - column:
+                  name: house_number
+                  type: int
+              - column:
+                  name: street_number
+                  type: int
+              - column:
+                  name: post_code
+                  type: varchar(12)
+              - column:
+                  name: phone_number
+                  type: varchar(20)
+              - column:
+                  name: phone_area_code
+                  type: varchar(5)
+              - column:
+                  name: email
+                  type: varchar(255)
