@@ -2,11 +2,6 @@ databaseChangeLog:
   - changeSet:
       id: create_user_table
       author: Krzysztof Sękowski
-#      preConditions:
-#        - onFail: MARK_RAN
-#        - not:
-#            tableExists:
-#              tableName: user
       changes:
         - createTable:
             tableName: user

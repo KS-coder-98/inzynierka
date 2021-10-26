@@ -2,11 +2,6 @@ databaseChangeLog:
   - changeSet:
       id: create_equipment_table
       author: Krzysztof Sękowski
-#      preConditions:
-#        - onFail: mark_ran
-#        - not:
-#            tableExists:
-#              tableName: equipment
       changes:
         - createTable:
             tableName: equipment
@@ -17,6 +12,9 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
               - column:
                   name: description
                   type: varchar(255)

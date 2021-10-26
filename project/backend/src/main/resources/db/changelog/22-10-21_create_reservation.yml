@@ -2,11 +2,6 @@ databaseChangeLog:
   - changeSet:
       id: create_reservation_table
       author: Krzysztof Sękowski
-#      preConditions:
-#        - onFail: mark_ran
-#        - not:
-#            tableExists:
-#              tableName: reservation
       changes:
         - createTable:
             tableName: reservation
@@ -16,7 +11,7 @@ databaseChangeLog:
                   type: BIGINT
                   constraints:
                     primaryKey: true
-                    nullable: true
+                    nullable: false
               - column:
                   name: start_time
                   type: datetime
@@ -25,18 +20,15 @@ databaseChangeLog:
                   type: datetime
               - column:
                   name: conference_room_id
-                  type: Bigint
-              - column:
-                  name: organiser_id
                   type: BIGINT
                   constraints:
                     foreignKey: true
-                    referenceTableName: user
+                    referenceTableName: conference_room
                     referenceColumnName: id
-                    foreignKeyName: fk_user_id
+                    foreignKeyName: fk_conference_room_id
                     validateForeignKey: true
               - column:
-                  name: member_id
+                  name: organiser_id
                   type: BIGINT
                   constraints:
                     foreignKey: true

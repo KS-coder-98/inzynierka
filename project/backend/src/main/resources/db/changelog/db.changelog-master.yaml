@@ -4,6 +4,8 @@ databaseChangeLog:
   - include:
       file: db/changelog/20-10-21_create_equipment.yml
   - include:
+      file: db/changelog/26-10-21_create_members_reservations.yml
+  - include:
       file: db/changelog/22-10-21_create_user.yml
   - include:
       file: db/changelog/22-10-21_create_reservation.yml

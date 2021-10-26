@@ -2,11 +2,6 @@ databaseChangeLog:
   - changeSet:
       id: create_confernce_room_table
       author: Krzysztof Sękowski
-#      preConditions:
-#        - onFail: mark_ran
-#        - not:
-#            tableExists:
-#              tableName: conference_room
       changes:
         - createTable:
             tableName: conference_room
@@ -24,5 +19,5 @@ databaseChangeLog:
                   name: description
                   type: varchar(255)
               - column:
-                  name: capasity
+                  name: capacity
                   type: int
