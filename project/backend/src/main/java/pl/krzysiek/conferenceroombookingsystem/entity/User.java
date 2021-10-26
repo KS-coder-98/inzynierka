@@ -12,7 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-public class User { // student
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
