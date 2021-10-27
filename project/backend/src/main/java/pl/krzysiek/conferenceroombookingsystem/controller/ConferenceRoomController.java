@@ -62,7 +62,7 @@ public class ConferenceRoomController {
         return ResponseEntity.notFound().build();
     }
 
-    @PutMapping
+    @PutMapping("add-eq-to-cr")
     public ResponseEntity<ConferenceRoom> addEquipmentToConferenceRoom(@RequestParam Long conferenceRoomId, @RequestParam Long equipmentId) {
         Optional<ConferenceRoom> optionalConferenceRoom = conferenceRoomRepository.findById(conferenceRoomId);
         Optional<Equipment> optionalEquipment = equipmentRepository.findById(equipmentId);
