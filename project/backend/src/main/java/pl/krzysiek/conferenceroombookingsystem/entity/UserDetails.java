@@ -14,13 +14,7 @@ import java.time.LocalDate;
 public class UserDetails {
 
     @Id
-    @Column(name = "user_id")
-    private Long userId;
-
-    @MapsId
-    @JoinColumn(name = "user_id")
-    @OneToOne(optional = false)
-    private User user;
+    private Long id;
 
     private LocalDate dateOfBirth;
     //todo rework as enum later

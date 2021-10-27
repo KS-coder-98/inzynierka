@@ -22,6 +22,12 @@ public class User {
     private String firstName;
     private String lastName;
 
+    @OneToOne
+    private UserDetails userDetails;
+
+    @OneToOne
+    private UserContact userContact;
+
     @ManyToMany
     @JoinTable(
             name = "members_reservations",

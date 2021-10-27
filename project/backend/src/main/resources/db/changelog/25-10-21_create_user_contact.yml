@@ -7,16 +7,13 @@ databaseChangeLog:
             tableName: user_contact
             columns:
               - column:
-                  name: user_id
+                  name: id
                   type: BIGINT
                   constraints:
                     nullable: false
                     primaryKey: true
                     primaryKeyName: pk_user
                     referencedTableName: user
-                    referencedColumnNames: id
-                    foreignKeyName: user_contact_id_fk
-                    validateForeignKey: true
               - column:
                   name: city
                   type: varchar(255)

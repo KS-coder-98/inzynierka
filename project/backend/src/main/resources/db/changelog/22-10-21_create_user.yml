@@ -21,3 +21,9 @@ databaseChangeLog:
               - column:
                   name: last_name
                   type: varchar(255)
+              - column:
+                  name: user_details_id
+                  type: bigint
+              - column:
+                  name: user_contact_id
+                  type: bigint

@@ -13,13 +13,8 @@ import javax.persistence.*;
 public class UserContact {
 
     @Id
-    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @MapsId
-    @JoinColumn(name = "user_id")
-    @OneToOne(optional = false)
-    private User user;
 
     private String city;
     private String street;
