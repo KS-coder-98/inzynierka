@@ -22,11 +22,11 @@ public class ConferenceRoom {
     private String description;
     private int capacity;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "conference_room_id")
     Set<Equipment> equipment = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "conference_room_id")
     Set<Reservation> reservations = new HashSet<>();
 }
