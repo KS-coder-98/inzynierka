@@ -8,6 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.krzysiek.conferenceroombookingsystem.entity.User;
+import pl.krzysiek.conferenceroombookingsystem.entity.UserContact;
+import pl.krzysiek.conferenceroombookingsystem.entity.UserDetails;
+import pl.krzysiek.conferenceroombookingsystem.repository.UserContactRepository;
+import pl.krzysiek.conferenceroombookingsystem.repository.UserDetailsRepository;
 import pl.krzysiek.conferenceroombookingsystem.repository.UserRepository;
 
 import java.util.Optional;
@@ -18,6 +22,8 @@ import java.util.Optional;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final UserContactRepository userContactRepository;
+    private final UserDetailsRepository userDetailsRepository;
 
     @GetMapping("/{id}")
     public ResponseEntity<User> one(@PathVariable Long id){
@@ -34,6 +40,15 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> create(@RequestBody User user){
+
+        UserContact userContact = new UserContact();
+        userContactRepository.save(userContact);
+        user.setUserContact(userContact);
+
+        UserDetails userDetails = new UserDetails();
+        userDetailsRepository.save(userDetails);
+        user.setUserDetails(userDetails);
+
         User user1 = userRepository.save(user);
         return new ResponseEntity<>(user1, HttpStatus.CREATED);
     }

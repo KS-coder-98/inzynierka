@@ -22,10 +22,10 @@ public class User {
     private String firstName;
     private String lastName;
 
-    @OneToOne
+    @OneToOne()
     private UserDetails userDetails;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private UserContact userContact;
 
     @ManyToMany

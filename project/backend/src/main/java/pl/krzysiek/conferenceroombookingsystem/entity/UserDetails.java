@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public class UserDetails {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private LocalDate dateOfBirth;
