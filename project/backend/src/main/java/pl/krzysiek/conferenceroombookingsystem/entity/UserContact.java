@@ -23,5 +23,4 @@ public class UserContact {
     private String postCode;
     private String phoneNumber;
     private String phoneAreaCode;
-    private String email;
 }

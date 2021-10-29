@@ -26,7 +26,6 @@ public class UserContactController {
                 userContact.getPostCode(),
                 userContact.getPhoneNumber(),
                 userContact.getPhoneAreaCode(),
-                userContact.getEmail(),
                 userContact.getId()
         );
         return userContactRepository.findById(userContact.getId())

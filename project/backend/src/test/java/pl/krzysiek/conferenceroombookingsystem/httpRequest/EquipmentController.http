@@ -1,0 +1,54 @@
+POST http://localhost:8080/equipment
+Content-Type: application/json
+
+{
+  "name": "wsdfgypo1wer",
+  "description": "opfsdfg"
+}
+
+<> 2021-10-27T173124.201.json
+<> 2021-10-27T173122.201.json
+<> 2021-10-27T173120.201.json
+<> 2021-10-27T173113.201.json
+<> 2021-10-27T170912.201.json
+
+###
+
+DELETE http://localhost:8080/equipment
+
+###
+POST http://localhost:8080/equipment
+
+###
+PUT http://localhost:8080/conference-room/?conferenceRoomId=7&equipmentId=17
+
+<> 2021-10-27T173638.200.json
+<> 2021-10-27T173635.200.json
+<> 2021-10-27T173549.200.json
+<> 2021-10-27T173200.200.json
+<> 2021-10-27T173138.200.json
+<> 2021-10-27T171702.200.json
+<> 2021-10-27T171700.200.json
+<> 2021-10-27T171656.200.json
+<> 2021-10-27T171639.200.json
+<> 2021-10-27T171630.200.json
+<> 2021-10-27T171625.200.json
+<> 2021-10-27T171611.200.json
+<> 2021-10-27T171414.200.json
+<> 2021-10-27T171342.200.json
+
+####
+PUT http://localhost:8080/equipment
+Content-Type: application/json
+
+{
+  "id": 18,
+  "name": "git",
+  "description": "opfsdfg"
+}
+
+<> 2021-10-27T173513.200.json
+<> 2021-10-27T173343.405.json
+<> 2021-10-27T173333.405.json
+
+###

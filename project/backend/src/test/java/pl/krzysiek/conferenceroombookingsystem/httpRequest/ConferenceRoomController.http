@@ -1,0 +1,35 @@
+POST http://localhost:8080/conference-room
+Content-Type: application/json
+
+{
+  "name": "A40w",
+  "description": "najewiększa",
+  "capacity": 400,
+  "equipment": [],
+  "reservations": []
+}
+
+###
+
+PUT http://localhost:8080/conference-room/3
+Content-Type: application/json
+
+{
+  "name": "zaktulizowana nazwa",
+  "description": "nowy opis",
+  "capacity": 4,
+  "equipment": [],
+  "reservations": []
+}
+
+###
+DELETE http://localhost:8080/conference-room/3
+
+
+###
+
+GET http://localhost:8080/conference-room/10
+Accept: application/json
+
+
+###

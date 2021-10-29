@@ -16,11 +16,14 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String nick;
     private String firstName;
     private String lastName;
+
+    //todo in liquibase this field is in userContact, and make this not nullable
+    private String email;
 
     @OneToOne()
     private UserDetails userDetails;
@@ -39,4 +42,9 @@ public class User {
     @OneToMany
     @JoinColumn(name = "organiser_id")
     Set<Reservation> myReservations = new HashSet<>();
+
+    public boolean isValid(){
+        //todo make validation for email
+        return !nick.isBlank() && !email.isBlank() && !firstName.isBlank() && !lastName.isBlank();
+    }
 }
