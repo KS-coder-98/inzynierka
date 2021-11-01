@@ -37,7 +37,7 @@ public class EquipmentController {
         return new ResponseEntity<>(equipment1, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Equipment> deleteEquipment(@PathVariable Long id) {
         var optionalEquipment = equipmentRepository.findById(id);
         var equipmentPresent = optionalEquipment.isPresent();

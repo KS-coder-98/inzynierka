@@ -14,23 +14,6 @@ import java.util.Set;
 @Setter
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String nick;
-    private String firstName;
-    private String lastName;
-
-    //todo in liquibase this field is in userContact, and make this not nullable
-    private String email;
-
-    @OneToOne()
-    private UserDetails userDetails;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private UserContact userContact;
-
     @ManyToMany
     @JoinTable(
             name = "members_reservations",
@@ -38,12 +21,23 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "reservation_id")
     )
     Set<Reservation> reservations = new HashSet<>();
-
     @OneToMany
     @JoinColumn(name = "organiser_id")
     Set<Reservation> myReservations = new HashSet<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String nick;
+    private String firstName;
+    private String lastName;
+    //todo in liquibase this field is in userContact, and make this not nullable
+    private String email;
+    @OneToOne()
+    private UserDetails userDetails;
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserContact userContact;
 
-    public boolean isValid(){
+    public boolean isValid() {
         //todo make validation for email
         return !nick.isBlank() && !email.isBlank() && !firstName.isBlank() && !lastName.isBlank();
     }

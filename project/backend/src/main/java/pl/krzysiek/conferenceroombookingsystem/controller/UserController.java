@@ -42,15 +42,4 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    //todo useless
-//    @DeleteMapping("{id}")
-//    public ResponseEntity<User> deleteUser(@PathVariable Long id) {
-//        Optional<User> optionalUser = userRepository.findById(id);
-//        boolean optionalUserPresent = optionalUser.isPresent();
-//        if (optionalUserPresent) {
-//            userRepository.deleteById(id);
-//            return ResponseEntity.ok().body(null);
-//        }
-//        return ResponseEntity.notFound().build();
-//    }
 }
