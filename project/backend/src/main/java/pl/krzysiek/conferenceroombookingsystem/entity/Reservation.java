@@ -14,17 +14,18 @@ import java.util.function.Predicate;
 @Setter
 public class Reservation implements Comparable<Reservation> {
 
+    @ManyToMany(mappedBy = "reservations")
+    Set<User> eventMembers = new HashSet<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
-
-    @ManyToMany(mappedBy = "reservations")
-    Set<User> eventMembers = new HashSet<>();
-
+    public static Predicate<Reservation> isOverlapping(Reservation reservation) {
+        return r -> r.getStartTime().isBefore(reservation.getEndTime())
+                && reservation.getStartTime().isBefore(r.getEndTime());
+    }
 
     @Override
     public String toString() {
@@ -42,11 +43,6 @@ public class Reservation implements Comparable<Reservation> {
     }
 
     public boolean isValid() {
-        return startTime.isBefore(endTime);
-    }
-
-    public static Predicate<Reservation> isOverlapping(Reservation reservation) {
-        return r -> r.getStartTime().isBefore(reservation.getEndTime())
-                && reservation.getStartTime().isBefore(r.getEndTime());
+        return startTime.isAfter(LocalDateTime.now()) && startTime.isBefore(endTime);
     }
 }
