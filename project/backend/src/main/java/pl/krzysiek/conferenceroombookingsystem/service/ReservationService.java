@@ -2,7 +2,7 @@ package pl.krzysiek.conferenceroombookingsystem.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.krzysiek.conferenceroombookingsystem.dto.ReservationDTO;
+import pl.krzysiek.conferenceroombookingsystem.dto.ReservationDto;
 import pl.krzysiek.conferenceroombookingsystem.entity.ConferenceRoom;
 import pl.krzysiek.conferenceroombookingsystem.entity.Reservation;
 import pl.krzysiek.conferenceroombookingsystem.entity.User;
@@ -20,7 +20,7 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final UserRepository userRepository;
 
-    public Optional<ReservationDTO> addReservation(Long conferenceRoomId, Long organiserId, Reservation reservation) {
+    public Optional<ReservationDto> addReservation(Long conferenceRoomId, Long organiserId, Reservation reservation) {
         Optional<User> optionalUser = userRepository.findById(organiserId);
         Optional<ConferenceRoom> optionalConferenceRoom = conferenceRoomRepository.findById(conferenceRoomId);
         if (optionalUser.isEmpty() || optionalConferenceRoom.isEmpty() || !reservation.isValid()) {
@@ -32,7 +32,7 @@ public class ReservationService {
                 .noneMatch(Reservation.isOverlapping(reservation));
         if (isNotOverlapping) {
             var result = makeReservation(user, conferenceRoom, reservation);
-            return Optional.of(ReservationDTO.builder()
+            return Optional.of(ReservationDto.builder()
                     .startTime(result.getStartTime())
                     .endTime(result.getEndTime())
                     .build());
@@ -57,7 +57,7 @@ public class ReservationService {
         return reservationRepository.save(reservation);
     }
 
-    public Optional<ReservationDTO> joinToReservation(Long userId, Long reservationId) {
+    public Optional<ReservationDto> joinToReservation(Long userId, Long reservationId) {
         Optional<User> optionalUser = userRepository.findById(userId);
         Optional<Reservation> optionalReservation = reservationRepository.findById(reservationId);
         if (optionalUser.isEmpty() || optionalReservation.isEmpty()) {
@@ -72,7 +72,7 @@ public class ReservationService {
         user.getReservations().add(reservation);
         userRepository.save(user);
         reservationRepository.save(reservation);
-        return Optional.of(ReservationDTO.builder()
+        return Optional.of(ReservationDto.builder()
                 .startTime(reservation.getStartTime())
                 .endTime(reservation.getEndTime())
                 .build()

@@ -9,13 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
-public class ReservationDTO {
+public class ReservationDto {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 }
-
-
-
-
-
-
