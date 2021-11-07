@@ -2,6 +2,7 @@ package pl.krzysiek.conferenceroombookingsystem.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.krzysiek.conferenceroombookingsystem.dto.ReservationDTO;
 import pl.krzysiek.conferenceroombookingsystem.entity.ConferenceRoom;
 import pl.krzysiek.conferenceroombookingsystem.entity.Reservation;
 import pl.krzysiek.conferenceroombookingsystem.entity.User;
@@ -19,7 +20,7 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final UserRepository userRepository;
 
-    public Optional<Reservation> addReservation(Long conferenceRoomId, Long organiserId, Reservation reservation) {
+    public Optional<ReservationDTO> addReservation(Long conferenceRoomId, Long organiserId, Reservation reservation) {
         Optional<User> optionalUser = userRepository.findById(organiserId);
         Optional<ConferenceRoom> optionalConferenceRoom = conferenceRoomRepository.findById(conferenceRoomId);
         if (optionalUser.isEmpty() || optionalConferenceRoom.isEmpty() || !reservation.isValid()) {
@@ -30,7 +31,11 @@ public class ReservationService {
         boolean isNotOverlapping = conferenceRoom.getReservations().stream()
                 .noneMatch(Reservation.isOverlapping(reservation));
         if (isNotOverlapping) {
-            return Optional.of(makeReservation(user, conferenceRoom, reservation));
+            var result = makeReservation(user, conferenceRoom, reservation);
+            return Optional.of(ReservationDTO.builder()
+                    .startTime(result.getStartTime())
+                    .endTime(result.getEndTime())
+                    .build());
         }
         return Optional.empty();
     }
@@ -48,7 +53,32 @@ public class ReservationService {
     private Reservation makeReservation(User user, ConferenceRoom conferenceRoom, Reservation reservation) {
         user.getMyReservations().add(reservation);
         conferenceRoom.getReservations().add(reservation);
+        reservation.setConferenceRoom(conferenceRoom);
         return reservationRepository.save(reservation);
+    }
+
+    public Optional<ReservationDTO> joinToReservation(Long userId, Long reservationId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        Optional<Reservation> optionalReservation = reservationRepository.findById(reservationId);
+        if (optionalUser.isEmpty() || optionalReservation.isEmpty()) {
+            return Optional.empty();
+        }
+
+        var user = optionalUser.get();
+        var reservation = optionalReservation.get();
+        if (reservation.getConferenceRoom().getCapacity() <= (long) reservation.getEventMembers().size())
+            return Optional.empty();
+        reservation.getEventMembers().add(user);
+        user.getReservations().add(reservation);
+        userRepository.save(user);
+        reservationRepository.save(reservation);
+        return Optional.of(ReservationDTO.builder()
+                .startTime(reservation.getStartTime())
+                .endTime(reservation.getEndTime())
+                .build()
+        );
+//        return Optional.of(makeReservation(user, reservation));
+        //todo
     }
 
 }

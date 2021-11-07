@@ -16,6 +16,11 @@ public class Reservation implements Comparable<Reservation> {
 
     @ManyToMany(mappedBy = "reservations")
     Set<User> eventMembers = new HashSet<>();
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "conference_room_id")
+    private ConferenceRoom conferenceRoom;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

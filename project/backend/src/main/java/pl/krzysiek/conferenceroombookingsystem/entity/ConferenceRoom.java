@@ -14,19 +14,15 @@ import java.util.Set;
 @NoArgsConstructor
 public class ConferenceRoom {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    private String name;
-    private String description;
-    private int capacity;
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "conference_room_id")
     Set<Equipment> equipment = new HashSet<>();
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "conference_room_id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "conferenceRoom")
     Set<Reservation> reservations = new HashSet<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String name;
+    private String description;
+    private int capacity;
 }
