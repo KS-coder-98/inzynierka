@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.krzysiek.conferenceroombookingsystem.entity.User;
+import pl.krzysiek.conferenceroombookingsystem.exceprion.ErrorMsg;
+import pl.krzysiek.conferenceroombookingsystem.exceprion.NotFoundException;
 import pl.krzysiek.conferenceroombookingsystem.service.UserService;
 
 @RestController
@@ -19,7 +21,7 @@ public class UserController {
     public ResponseEntity<User> one(@PathVariable Long id) {
         return userService.getUserById(id)
                 .map(ResponseEntity.ok()::body)
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new NotFoundException(ErrorMsg.USER_NOT_FOUND));
     }
 
     @GetMapping
