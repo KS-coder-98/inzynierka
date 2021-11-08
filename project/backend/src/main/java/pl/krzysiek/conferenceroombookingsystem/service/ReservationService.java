@@ -77,8 +77,7 @@ public class ReservationService {
                 .endTime(reservation.getEndTime())
                 .build()
         );
-//        return Optional.of(makeReservation(user, reservation));
-        //todo
+        //todo better validation
     }
 
 }
