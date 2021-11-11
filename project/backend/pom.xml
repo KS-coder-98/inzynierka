@@ -62,6 +62,18 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>3.0.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.microsoft.azure/azure-active-directory-spring-boot-starter -->
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-active-directory-spring-boot-starter</artifactId>
+            <version>3.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>

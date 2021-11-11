@@ -1,0 +1,7 @@
+secretKeyConferenceRoomBookin
+value: R5m7Q~BE-srtOFLDBVIsx7PtR5EKvMQxw6~3R
+id: 805adb52-0f67-4ab1-9a54-8f4bea19ab0e
+
+
+login: user1@conferenceroombooking.onmicrosoft.com
+haslo: Haslo1234!@#$$

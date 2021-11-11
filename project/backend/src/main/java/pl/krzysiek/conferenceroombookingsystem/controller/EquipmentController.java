@@ -19,6 +19,7 @@ public class EquipmentController {
     private final EquipmentRepository equipmentRepository;
 
     @GetMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Equipment> one(@PathVariable Long id) {
         return equipmentRepository.findById(id)
                 .map(ResponseEntity.ok()::body)
