@@ -1,9 +1,8 @@
-// import Button from "@restart/ui/esm/Button";
 import React from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
-import { DoorClosedFill } from "react-bootstrap-icons";
+import { SignOutButton } from "./SignOutButton";
 
-const MyNavbar = () => {
+const MyNavbar = ({ username }) => {
   return (
     <Navbar bg="dark" expand="lg" variant="dark">
       <Container>
@@ -27,11 +26,10 @@ const MyNavbar = () => {
           </Nav>
           <Nav>
             <Navbar.Text>
-              <a href="#login">User name</a>
+              <a href="#login">{username}</a>
             </Navbar.Text>
             <Nav.Link href="#features">
-              {" "}
-              <DoorClosedFill />
+              <SignOutButton />
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

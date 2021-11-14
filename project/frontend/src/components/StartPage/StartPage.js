@@ -1,15 +1,14 @@
 import React from "react";
-import "./../StartPage/startPage.css";
-import { Button } from "react-bootstrap";
+import { SignInButton } from "../nav/SignInButton";
 
 const StartPage = () => {
   return (
-    <div className="container myClass">
+    <div className="container">
       <div className="row">
         <h2>Witaj w systemie do rezerwacji auli konferencyjnych</h2>
       </div>
       <div class="row">
-        <Button>Zalogój się</Button>
+        <SignInButton />
       </div>
     </div>
   );
