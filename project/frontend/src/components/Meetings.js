@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { getTokenFromStorage } from "../handlerToLocalStorage";
 
 const Meetings = () => {
   const [meetings, setmeetings] = useState([]);
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const token = "Bearer " + localStorage.getItem("token");
+      const token = getTokenFromStorage();
       console.log(token);
 
       await fetch("http://localhost:8080/equipment/3", {

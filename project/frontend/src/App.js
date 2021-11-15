@@ -8,15 +8,13 @@ import React from "react";
 
 import StartPage from "./components/StartPage/StartPage";
 import MyNavbar from "./components/nav/MyNavbar";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Meetings from "./components/Meetings";
 import { useEffect } from "react";
 import { loginRequest } from "./authConfig";
+import { setTokenInStorage } from "./handlerToLocalStorage";
+import ConferenceRooms from "./components/conferenceRoom/ConferenceRoom";
+import ListConferenceRooms from "./components/conferenceRoom/ListConferenceRooms";
 
 // import StartPage from "./components/StartPage/StartPage";
 
@@ -38,6 +36,7 @@ const ProfileContent = () => {
         account: accounts[0],
       })
       .then((response) => {
+        setTokenInStorage(response.accessToken);
         localStorage.setItem("token", response.accessToken);
       });
   }
@@ -60,6 +59,7 @@ const MainContent = () => {
         <Router>
           <Routes>
             <Route path="/metings" element={<Meetings />} />
+            <Route path="/conference-room" element={<ListConferenceRooms />} />
           </Routes>
         </Router>
       </AuthenticatedTemplate>
