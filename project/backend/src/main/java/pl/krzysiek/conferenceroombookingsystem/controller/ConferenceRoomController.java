@@ -6,8 +6,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.krzysiek.conferenceroombookingsystem.dto.ConferenceRoomDto;
 import pl.krzysiek.conferenceroombookingsystem.entity.ConferenceRoom;
 import pl.krzysiek.conferenceroombookingsystem.entity.Equipment;
+import pl.krzysiek.conferenceroombookingsystem.mapper.ConferenceRoomMapper;
 import pl.krzysiek.conferenceroombookingsystem.repository.ConferenceRoomRepository;
 import pl.krzysiek.conferenceroombookingsystem.repository.EquipmentRepository;
 
@@ -21,19 +23,21 @@ public class ConferenceRoomController {
 
     private final ConferenceRoomRepository conferenceRoomRepository;
     private final EquipmentRepository equipmentRepository;
+    private final ConferenceRoomMapper conferenceRoomMapper;
 
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ConferenceRoom> one(@PathVariable Long id) {
+    @GetMapping("{id}")
+    public ResponseEntity<ConferenceRoomDto> one(@PathVariable Long id) {
         return conferenceRoomRepository.findById(id)
+                .map(conferenceRoomMapper::toConferenceRoomDto)
                 .map(ResponseEntity.ok()::body)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping
-    public ResponseEntity<Page<ConferenceRoom>> all(Pageable pageable) {
+    public ResponseEntity<Page<ConferenceRoomDto>> all(Pageable pageable) {
         var page = conferenceRoomRepository.findAll(pageable);
-        return ResponseEntity.ok().body(page);
+        return ResponseEntity.ok().body(page.map(conferenceRoomMapper::toConferenceRoomDto));
     }
 
     @PostMapping
