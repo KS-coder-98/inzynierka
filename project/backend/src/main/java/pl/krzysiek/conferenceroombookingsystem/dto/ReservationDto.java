@@ -1,15 +1,14 @@
 package pl.krzysiek.conferenceroombookingsystem.dto;
 
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
 @Builder
+@Data
 public class ReservationDto {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    private ConferenceRoomDto conferenceRoomDto;
 }
