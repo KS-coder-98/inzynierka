@@ -6,7 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.krzysiek.conferenceroombookingsystem.dto.EquipmentDto;
 import pl.krzysiek.conferenceroombookingsystem.entity.Equipment;
+import pl.krzysiek.conferenceroombookingsystem.mapper.EquipmentMapper;
 import pl.krzysiek.conferenceroombookingsystem.repository.EquipmentRepository;
 
 import java.util.Optional;
@@ -17,28 +19,30 @@ import java.util.Optional;
 public class EquipmentController {
 
     private final EquipmentRepository equipmentRepository;
+    private final EquipmentMapper equipmentMapper;
 
-    @PostMapping("/{id}")
-    public ResponseEntity<Equipment> one(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<EquipmentDto> one(@PathVariable Long id) {
         return equipmentRepository.findById(id)
+                .map(equipmentMapper::toEquipmentDto)
                 .map(ResponseEntity.ok()::body)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping
-    public ResponseEntity<Page<Equipment>> all(Pageable pageable) {
+    public ResponseEntity<Page<EquipmentDto>> all(Pageable pageable) {
         var page = equipmentRepository.findAll(pageable);
-        return ResponseEntity.ok().body(page);
+        return ResponseEntity.ok().body(page.map(equipmentMapper::toEquipmentDto));
     }
 
-    @PostMapping
-    public ResponseEntity<Equipment> create(@RequestBody Equipment equipment) {
+    @GetMapping("/create")
+    public ResponseEntity<EquipmentDto> create(@RequestBody Equipment equipment) {
         Equipment equipment1 = equipmentRepository.save(equipment);
-        return new ResponseEntity<>(equipment1, HttpStatus.CREATED);
+        return new ResponseEntity<>(equipmentMapper.toEquipmentDto(equipment1), HttpStatus.CREATED);
     }
 
     @GetMapping("/delete/{id}")
-    public ResponseEntity<Equipment> deleteEquipment(@PathVariable Long id) {
+    public ResponseEntity<EquipmentDto> deleteEquipment(@PathVariable Long id) {
         var optionalEquipment = equipmentRepository.findById(id);
         var equipmentPresent = optionalEquipment.isPresent();
         if (equipmentPresent) {
@@ -49,7 +53,7 @@ public class EquipmentController {
     }
 
     @GetMapping("/update")
-    public ResponseEntity<Equipment> update(@RequestBody Equipment equipment) {
+    public ResponseEntity<EquipmentDto> update(@RequestBody Equipment equipment) {
         Optional<Equipment> byId = equipmentRepository.findById(equipment.getId());
         if (byId.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -58,7 +62,7 @@ public class EquipmentController {
         equipment1.setName(equipment.getName());
         equipment1.setDescription(equipment.getDescription());
         var result = equipmentRepository.save(equipment1);
-        return ResponseEntity.ok().body(result);
+        return ResponseEntity.ok().body(equipmentMapper.toEquipmentDto(result));
 
     }
 }
