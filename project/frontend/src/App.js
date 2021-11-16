@@ -12,9 +12,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Meetings from "./components/Meetings";
 import { useEffect } from "react";
 import { loginRequest } from "./authConfig";
-import { setTokenInStorage } from "./handlerToLocalStorage";
+import {
+  setEmailInStorage,
+  setNickInStorage,
+  setTokenInStorage,
+} from "./handlerToLocalStorage";
 import ConferenceRooms from "./components/conferenceRoom/ConferenceRoom";
 import ListConferenceRooms from "./components/conferenceRoom/ListConferenceRooms";
+import { sayHello } from "./comunication";
 
 // import StartPage from "./components/StartPage/StartPage";
 
@@ -37,7 +42,9 @@ const ProfileContent = () => {
       })
       .then((response) => {
         setTokenInStorage(response.accessToken);
-        localStorage.setItem("token", response.accessToken);
+        setEmailInStorage(accounts[0].username);
+        setNickInStorage(accounts[0].name);
+        sayHello();
       });
   }
 

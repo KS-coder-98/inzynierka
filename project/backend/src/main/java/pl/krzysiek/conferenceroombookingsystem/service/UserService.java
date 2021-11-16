@@ -21,22 +21,22 @@ public class UserService {
     private final UserContactRepository userContactRepository;
     private final UserDetailsRepository userDetailsRepository;
 
-    public Optional<User> createUser(User user) {
-        if (user.isValid()) {
-            if (userRepository.existsByEmail(user.getEmail()) && userRepository.existsByNick(user.getNick())) {
-                return Optional.empty();
-            }
-            UserContact userContact = new UserContact();
-            userContactRepository.save(userContact);
-            user.setUserContact(userContact);
-
-            UserDetails userDetails = new UserDetails();
-            userDetailsRepository.save(userDetails);
-            user.setUserDetails(userDetails);
-            user.setId(null);
-            return Optional.of(userRepository.save(user));
+    public void createUser(String mail, String nick) {
+        if (userRepository.existsByEmail(mail) && userRepository.existsByNick(nick)) {
+            return;
         }
-        return Optional.empty();
+        var user = new User();
+        user.setEmail(mail);
+        user.setNick(nick);
+        UserContact userContact = new UserContact();
+        userContactRepository.save(userContact);
+        user.setUserContact(userContact);
+
+        UserDetails userDetails = new UserDetails();
+        userDetailsRepository.save(userDetails);
+        user.setUserDetails(userDetails);
+        user.setId(null);
+        userRepository.save(user);
     }
 
     public Optional<User> getUserById(Long id) {

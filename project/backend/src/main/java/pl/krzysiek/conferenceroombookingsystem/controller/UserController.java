@@ -27,12 +27,9 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getAllUsers(pageable));
     }
 
-    @GetMapping("/create")
-    public ResponseEntity<User> create(@RequestBody User user) {
-        return userService.createUser(user)
-                .map(ResponseEntity.ok()::body)
-                .orElse(ResponseEntity.badRequest().header("Responded", "failed to create user")
-                        .body(null));
+    @GetMapping("/hello")
+    public void userHandler(@RequestParam String mail, @RequestParam String nick) {
+        userService.createUser(mail, nick);
     }
 
     @GetMapping("/update")

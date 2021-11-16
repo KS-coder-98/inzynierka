@@ -39,6 +39,6 @@ public class User {
 
     public boolean isValid() {
         //todo make validation for email
-        return !nick.isBlank() && !email.isBlank() && !firstName.isBlank() && !lastName.isBlank();
+        return !email.isBlank();
     }
 }
