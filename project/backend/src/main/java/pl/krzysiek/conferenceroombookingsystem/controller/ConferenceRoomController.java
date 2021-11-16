@@ -46,17 +46,18 @@ public class ConferenceRoomController {
         return new ResponseEntity<>(conferenceRoom1, HttpStatus.CREATED);
     }
 
-    @GetMapping("update")
-    public ResponseEntity<ConferenceRoom> updateConferenceRoom(@RequestBody ConferenceRoom room) {
+    @GetMapping("/update")
+    public ResponseEntity<ConferenceRoomDto> updateConferenceRoom(@RequestBody ConferenceRoom room) {
         conferenceRoomRepository.setConferenceRoomById(room.getName(), room.getDescription(),
                 room.getCapacity(), room.getId());
         return conferenceRoomRepository.findById(room.getId())
+                .map(conferenceRoomMapper::toConferenceRoomDto)
                 .map(ResponseEntity.ok()::body)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/delete/{id}")
-    public ResponseEntity<ConferenceRoom> deleteConferenceRoom(@PathVariable(value = "id") Long conferenceId) {
+    public ResponseEntity<ConferenceRoomDto> deleteConferenceRoom(@PathVariable(value = "id") Long conferenceId) {
         var optionalConferenceRoom = conferenceRoomRepository.findById(conferenceId);
         var conferenceRoomPresent = optionalConferenceRoom.isPresent();
         if (conferenceRoomPresent) {
@@ -67,7 +68,7 @@ public class ConferenceRoomController {
     }
 
     @GetMapping("/add-eq-to-cr")
-    public ResponseEntity<ConferenceRoom> addEquipmentToConferenceRoom(@RequestParam Long conferenceRoomId, @RequestParam Long equipmentId) {
+    public ResponseEntity<ConferenceRoomDto> addEquipmentToConferenceRoom(@RequestParam Long conferenceRoomId, @RequestParam Long equipmentId) {
         Optional<ConferenceRoom> optionalConferenceRoom = conferenceRoomRepository.findById(conferenceRoomId);
         Optional<Equipment> optionalEquipment = equipmentRepository.findById(equipmentId);
         if (optionalEquipment.isEmpty() || optionalConferenceRoom.isEmpty()) {
@@ -77,6 +78,6 @@ public class ConferenceRoomController {
         Equipment equipment = optionalEquipment.get();
         conferenceRoom.getEquipment().add(equipment);
         conferenceRoomRepository.save(conferenceRoom);
-        return ResponseEntity.ok().body(conferenceRoom);
+        return ResponseEntity.ok().body(conferenceRoomMapper.toConferenceRoomDto(conferenceRoom));
     }
 }
