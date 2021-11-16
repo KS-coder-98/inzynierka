@@ -2,7 +2,7 @@ package pl.krzysiek.conferenceroombookingsystem.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +16,8 @@ public class UserContactController {
 
     private final UserContactRepository userContactRepository;
 
-    @PutMapping
-    public ResponseEntity<UserContact> updateUserContactById(@RequestBody UserContact userContact){
+    @GetMapping
+    public ResponseEntity<UserContact> updateUserContactById(@RequestBody UserContact userContact) {
         userContactRepository.setUserContactById(
                 userContact.getCity(),
                 userContact.getStreet(),

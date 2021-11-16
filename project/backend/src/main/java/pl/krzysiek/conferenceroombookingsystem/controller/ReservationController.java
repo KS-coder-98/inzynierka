@@ -14,7 +14,14 @@ public class ReservationController {
 
     private final ReservationService reservationService;
 
-    @PostMapping
+    @GetMapping("/{id}")
+    public ResponseEntity<ReservationDto> one(@PathVariable Long id) {
+        return reservationService.getReservation(id)
+                .map(ResponseEntity.ok()::body)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping
     public ResponseEntity<ReservationDto> addReservation(@RequestParam Long conferenceRoomId,
                                                          @RequestParam Long organiserId,
                                                          @RequestBody Reservation reservation) {
@@ -23,14 +30,14 @@ public class ReservationController {
                 .orElse(ResponseEntity.badRequest().build());
     }
 
-    @DeleteMapping("/{id}")
+    @GetMapping("/delete/{id}")
     public ResponseEntity<Reservation> deleteReservation(@PathVariable Long id) {
         return reservationService.deleteReservation(id) ?
                 ResponseEntity.ok().body(null)
                 : ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/join")
+    @GetMapping("/join")
     public ResponseEntity<ReservationDto> joinToReservation(@RequestParam Long userId, @RequestParam Long reservationId) {
         return reservationService.joinToReservation(userId, reservationId)
                 .map(ResponseEntity.ok()::body)

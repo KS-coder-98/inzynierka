@@ -40,13 +40,13 @@ public class ConferenceRoomController {
         return ResponseEntity.ok().body(page.map(conferenceRoomMapper::toConferenceRoomDto));
     }
 
-    @PostMapping
+    @GetMapping("/create")
     public ResponseEntity<ConferenceRoom> create(@RequestBody ConferenceRoom conferenceRoom) {
         ConferenceRoom conferenceRoom1 = conferenceRoomRepository.save(conferenceRoom);
         return new ResponseEntity<>(conferenceRoom1, HttpStatus.CREATED);
     }
 
-    @PutMapping
+    @GetMapping("update")
     public ResponseEntity<ConferenceRoom> updateConferenceRoom(@RequestBody ConferenceRoom room) {
         conferenceRoomRepository.setConferenceRoomById(room.getName(), room.getDescription(),
                 room.getCapacity(), room.getId());
@@ -55,7 +55,7 @@ public class ConferenceRoomController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
+    @GetMapping("/delete/{id}")
     public ResponseEntity<ConferenceRoom> deleteConferenceRoom(@PathVariable(value = "id") Long conferenceId) {
         var optionalConferenceRoom = conferenceRoomRepository.findById(conferenceId);
         var conferenceRoomPresent = optionalConferenceRoom.isPresent();
@@ -66,7 +66,7 @@ public class ConferenceRoomController {
         return ResponseEntity.notFound().build();
     }
 
-    @PutMapping("add-eq-to-cr")
+    @GetMapping("/add-eq-to-cr")
     public ResponseEntity<ConferenceRoom> addEquipmentToConferenceRoom(@RequestParam Long conferenceRoomId, @RequestParam Long equipmentId) {
         Optional<ConferenceRoom> optionalConferenceRoom = conferenceRoomRepository.findById(conferenceRoomId);
         Optional<Equipment> optionalEquipment = equipmentRepository.findById(equipmentId);

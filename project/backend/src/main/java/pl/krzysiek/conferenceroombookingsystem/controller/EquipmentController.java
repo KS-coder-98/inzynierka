@@ -18,7 +18,7 @@ public class EquipmentController {
 
     private final EquipmentRepository equipmentRepository;
 
-    @GetMapping("/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<Equipment> one(@PathVariable Long id) {
         return equipmentRepository.findById(id)
                 .map(ResponseEntity.ok()::body)
@@ -37,7 +37,7 @@ public class EquipmentController {
         return new ResponseEntity<>(equipment1, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}")
+    @GetMapping("/delete/{id}")
     public ResponseEntity<Equipment> deleteEquipment(@PathVariable Long id) {
         var optionalEquipment = equipmentRepository.findById(id);
         var equipmentPresent = optionalEquipment.isPresent();
@@ -48,7 +48,7 @@ public class EquipmentController {
         return ResponseEntity.notFound().build();
     }
 
-    @PutMapping()
+    @GetMapping("/update")
     public ResponseEntity<Equipment> update(@RequestBody Equipment equipment) {
         Optional<Equipment> byId = equipmentRepository.findById(equipment.getId());
         if (byId.isEmpty()) {

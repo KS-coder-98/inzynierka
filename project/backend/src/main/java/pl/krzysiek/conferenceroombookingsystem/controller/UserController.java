@@ -27,7 +27,7 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getAllUsers(pageable));
     }
 
-    @PostMapping
+    @GetMapping("/create")
     public ResponseEntity<User> create(@RequestBody User user) {
         return userService.createUser(user)
                 .map(ResponseEntity.ok()::body)
@@ -35,7 +35,7 @@ public class UserController {
                         .body(null));
     }
 
-    @PutMapping
+    @GetMapping("/update")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         return userService.updateUser(user)
                 .map(ResponseEntity.ok()::body)
