@@ -48,7 +48,8 @@ public class ConferenceRoomController {
     }
 
     @GetMapping("/add-eq-to-cr")
-    public ResponseEntity<ConferenceRoomDto> addEquipmentToConferenceRoom(@RequestParam Long conferenceRoomId, @RequestParam Long equipmentId) {
+    public ResponseEntity<ConferenceRoomDto> addEquipmentToConferenceRoom(@RequestParam Long conferenceRoomId,
+                                                                          @RequestParam Long equipmentId) {
         return conferenceRoomService.addEquipment(conferenceRoomId, equipmentId)
                 .map(ResponseEntity.ok()::body)
                 .orElse(ResponseEntity.notFound().build());

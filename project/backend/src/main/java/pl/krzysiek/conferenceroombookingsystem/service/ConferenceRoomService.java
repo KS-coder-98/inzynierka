@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import pl.krzysiek.conferenceroombookingsystem.dto.ConferenceRoomDto;
 import pl.krzysiek.conferenceroombookingsystem.entity.ConferenceRoom;
 import pl.krzysiek.conferenceroombookingsystem.entity.Equipment;
@@ -53,7 +52,7 @@ public class ConferenceRoomService {
         return false;
     }
 
-    public Optional<ConferenceRoomDto> addEquipment(@RequestParam Long conferenceRoomId, @RequestParam Long equipmentId) {
+    public Optional<ConferenceRoomDto> addEquipment(Long conferenceRoomId, Long equipmentId) {
         Optional<ConferenceRoom> optionalConferenceRoom = conferenceRoomRepository.findById(conferenceRoomId);
         Optional<Equipment> optionalEquipment = equipmentRepository.findById(equipmentId);
         if (optionalEquipment.isEmpty() || optionalConferenceRoom.isEmpty()) {

@@ -8,4 +8,7 @@ public class UserDto {
     private String nick;
     private String firstName;
     private String lastName;
+    private String email;
+    private UserDetailsDto userDetails;
+    private UserContactDto userContact;
 }

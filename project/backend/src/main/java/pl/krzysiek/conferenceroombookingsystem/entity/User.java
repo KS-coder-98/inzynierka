@@ -14,6 +14,9 @@ import java.util.Set;
 @Setter
 public class User {
 
+    public static final String NORMAL_USER = "USER";
+    public static final String ADMIN_USER = "ADMIN";
+
     @ManyToMany
     @JoinTable(
             name = "members_reservations",

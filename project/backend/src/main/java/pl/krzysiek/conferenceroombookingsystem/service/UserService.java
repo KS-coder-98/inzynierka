@@ -33,6 +33,7 @@ public class UserService {
         user.setUserContact(userContact);
 
         UserDetails userDetails = new UserDetails();
+        userDetails.setTypeOfMembers(User.NORMAL_USER);
         userDetailsRepository.save(userDetails);
         user.setUserDetails(userDetails);
         user.setId(null);
@@ -51,4 +52,16 @@ public class UserService {
         userRepository.setUserById(user.getNick(), user.getFirstName(), user.getLastName(), user.getId());
         return userRepository.findById(user.getId());
     }
+
+    public boolean isAdmin(String mail) {
+        Optional<User> userRepositoryByEmail = userRepository.findByEmail(mail);
+        return userRepositoryByEmail.filter(user -> User.ADMIN_USER.equals(
+                        user.getUserDetails().getTypeOfMembers()))
+                .isPresent();
+    }
+
+    public Optional<User> getUserByMail(String mail) {
+        return userRepository.findByEmail(mail);
+    }
+
 }

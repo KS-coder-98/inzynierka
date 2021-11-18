@@ -5,7 +5,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.krzysiek.conferenceroombookingsystem.dto.UserDto;
 import pl.krzysiek.conferenceroombookingsystem.entity.User;
+import pl.krzysiek.conferenceroombookingsystem.mapper.UserMapper;
 import pl.krzysiek.conferenceroombookingsystem.service.UserService;
 
 @RestController
@@ -14,6 +16,7 @@ import pl.krzysiek.conferenceroombookingsystem.service.UserService;
 public class UserController {
 
     private final UserService userService;
+    private final UserMapper userMapper;
 
     @GetMapping("/{id}")
     public ResponseEntity<User> one(@PathVariable Long id) {
@@ -22,14 +25,22 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/byEmail")
+    public ResponseEntity<UserDto> oneByEmail(@RequestParam String mail) {
+        return userService.getUserByMail(mail)
+                .map(oU -> ResponseEntity.ok().body(userMapper.toUserDto(oU)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @GetMapping
-    public ResponseEntity<Page<User>> all(Pageable pageable) {
-        return ResponseEntity.ok().body(userService.getAllUsers(pageable));
+    public ResponseEntity<Page<UserDto>> all(Pageable pageable) {
+        return ResponseEntity.ok().body(userService.getAllUsers(pageable).map(userMapper::toUserDto));
     }
 
     @GetMapping("/hello")
-    public void userHandler(@RequestParam String mail, @RequestParam String nick) {
+    public ResponseEntity<Boolean> userHandler(@RequestParam String mail, @RequestParam String nick) {
         userService.createUser(mail, nick);
+        return ResponseEntity.ok(userService.isAdmin(mail));
     }
 
     @GetMapping("/update")
