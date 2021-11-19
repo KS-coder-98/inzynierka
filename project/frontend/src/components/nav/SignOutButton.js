@@ -19,7 +19,10 @@ export const SignOutButton = () => {
     <Button
       variant="secondary"
       className="ml-auto"
-      onClick={() => handleLogout(instance)}
+      onClick={() => {
+        localStorage.clear();
+        handleLogout(instance);
+      }}
     >
       <DoorClosedFill />
     </Button>

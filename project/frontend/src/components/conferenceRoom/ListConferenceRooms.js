@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ConferenceRoom from "./ConferenceRoom";
 import { getAllConferenceRooms } from "./ConferenceRoomHelper";
 import ConferenceRoomLayout from "./ConferenceRoomLayout";
 import { Row } from "react-bootstrap";

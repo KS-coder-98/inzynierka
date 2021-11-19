@@ -17,9 +17,9 @@ import {
   setNickInStorage,
   setTokenInStorage,
 } from "./handlerToLocalStorage";
-import ConferenceRooms from "./components/conferenceRoom/ConferenceRoom";
 import ListConferenceRooms from "./components/conferenceRoom/ListConferenceRooms";
 import { sayHello } from "./comunication";
+import MainPage from "./components/mainPage/MainPage";
 
 // import StartPage from "./components/StartPage/StartPage";
 
@@ -65,6 +65,7 @@ const MainContent = () => {
         <ProfileContent />
         <Router>
           <Routes>
+            <Route path="/" element={<MainPage />} />
             <Route path="/metings" element={<Meetings />} />
             <Route path="/conference-room" element={<ListConferenceRooms />} />
           </Routes>
