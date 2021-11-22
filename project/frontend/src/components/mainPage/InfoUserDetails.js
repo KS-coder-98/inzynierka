@@ -6,7 +6,7 @@ const InfoUserDetails = ({ user }) => {
     <CustomCard
       bg="info"
       text="light"
-      tHeader="Dane"
+      // tHeader="Dane"
       tTitle="Podstawowe informacje"
       content={<UserDetailsLayout userDetails={user} />}
     />

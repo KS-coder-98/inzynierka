@@ -8,7 +8,7 @@ const InfoUser = ({ user }) => {
     <CustomCard
       bg="success"
       text="light"
-      tHeader="Dane"
+      // tHeader="Dane"
       tTitle="Podstawowe informacje"
       content={<UserListLout user={user} />}
     />

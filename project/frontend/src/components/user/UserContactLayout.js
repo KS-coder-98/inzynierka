@@ -1,5 +1,5 @@
 import React from "react";
-import CustomTable from "../CustomTable";
+import TwoColumnTable from "../TwoColumnTable";
 
 const UserContactLayout = ({ userContact }) => {
   const temp = [
@@ -12,7 +12,7 @@ const UserContactLayout = ({ userContact }) => {
     { key: "Nr kierunkowy", val: userContact.phoneAreaCode },
   ];
 
-  return <CustomTable date={temp} variant="dark" />;
+  return <TwoColumnTable date={temp} variant="dark" />;
 };
 
 export default UserContactLayout;

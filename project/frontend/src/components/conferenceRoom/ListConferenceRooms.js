@@ -8,7 +8,6 @@ const ListConferenceRooms = () => {
 
   useEffect(() => {
     getAllConferenceRooms(setConRooms);
-    console.log(conRooms);
   }, []);
 
   return (

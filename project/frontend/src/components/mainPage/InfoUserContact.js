@@ -6,7 +6,7 @@ const InfoUserContact = ({ user }) => {
     <CustomCard
       bg="info"
       text="light"
-      tHeader="Dane"
+      // tHeader="Dane"
       tTitle="Podstawowe informacje"
       content={<UserContactLayout userContact={user} />}
     />

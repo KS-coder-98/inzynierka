@@ -21,8 +21,6 @@ import ListConferenceRooms from "./components/conferenceRoom/ListConferenceRooms
 import { sayHello } from "./comunication";
 import MainPage from "./components/mainPage/MainPage";
 
-// import StartPage from "./components/StartPage/StartPage";
-
 /**
  * Renders information about the signed-in user or a button to retrieve data about the user
  */
@@ -31,6 +29,7 @@ const ProfileContent = () => {
 
   useEffect(() => {
     setToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function setToken() {

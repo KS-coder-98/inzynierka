@@ -1,5 +1,5 @@
 import React from "react";
-import CustomTable from "../CustomTable";
+import TwoColumnTable from "../TwoColumnTable";
 
 const UserListLout = ({ user }) => {
   const temp = [
@@ -9,7 +9,7 @@ const UserListLout = ({ user }) => {
     { key: "Mail", val: user.email },
   ];
 
-  return <CustomTable date={temp} variant="dark" />;
+  return <TwoColumnTable date={temp} variant="dark" />;
 };
 
 export default UserListLout;
