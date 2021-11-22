@@ -59,7 +59,6 @@ export let getAllObject = async (setter, url) => {
 
 export let getObjectBySthAsParam = async (nameId, id, setter, url) => {
   const token = getTokenFromStorage();
-  console.log(url + "?" + nameId + "=" + id);
   await fetch(url + "?" + nameId + "=" + id, {
     headers: {
       "Content-type": "application/json; charset=UTF-8",
@@ -68,7 +67,6 @@ export let getObjectBySthAsParam = async (nameId, id, setter, url) => {
   })
     .then((response) => response.json())
     .then((e) => {
-      console.log(e);
       setter(e);
     });
 };

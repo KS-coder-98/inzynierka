@@ -7,12 +7,19 @@ import pl.krzysiek.conferenceroombookingsystem.dto.ReservationDto;
 import pl.krzysiek.conferenceroombookingsystem.entity.Reservation;
 import pl.krzysiek.conferenceroombookingsystem.service.ReservationService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("reservation")
 @RequiredArgsConstructor
 public class ReservationController {
 
     private final ReservationService reservationService;
+
+    @GetMapping("/user-reservation")
+    public ResponseEntity<List<ReservationDto>> getUserUpcomingEvents(@RequestParam String mail) {
+        return ResponseEntity.ok(reservationService.getUpcomingUserEvents(mail));
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ReservationDto> one(@PathVariable Long id) {

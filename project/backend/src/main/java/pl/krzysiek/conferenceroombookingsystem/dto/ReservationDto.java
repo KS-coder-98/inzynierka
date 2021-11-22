@@ -8,5 +8,6 @@ import java.time.LocalDateTime;
 public class ReservationDto {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private ConferenceRoomDto conferenceRoomDto;
+    private ConferenceRoomDto conferenceRoom;
+    private String name;
 }

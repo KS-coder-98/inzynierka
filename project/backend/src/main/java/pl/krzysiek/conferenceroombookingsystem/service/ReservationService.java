@@ -11,7 +11,10 @@ import pl.krzysiek.conferenceroombookingsystem.repository.ConferenceRoomReposito
 import pl.krzysiek.conferenceroombookingsystem.repository.ReservationRepository;
 import pl.krzysiek.conferenceroombookingsystem.repository.UserRepository;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -83,6 +86,15 @@ public class ReservationService {
         reservationRepository.save(reservation);
         return Optional.of(reservationMapper.toReservationDto(reservation));
         //todo better validation
+    }
+
+    public List<ReservationDto> getUpcomingUserEvents(String mail) {
+        User user = userRepository.findByEmail(mail).orElseThrow();
+        return user.getReservations().stream()
+                .filter(reservation -> reservation.getStartTime().isAfter(LocalDateTime.now())
+                        && reservation.getStartTime().isBefore(LocalDateTime.now().plusDays(3)))
+                .map(reservationMapper::toReservationDto)
+                .collect(Collectors.toList());
     }
 
 }
