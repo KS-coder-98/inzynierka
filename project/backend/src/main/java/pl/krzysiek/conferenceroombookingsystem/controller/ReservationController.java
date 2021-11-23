@@ -45,8 +45,8 @@ public class ReservationController {
     }
 
     @GetMapping("/join")
-    public ResponseEntity<ReservationDto> joinToReservation(@RequestParam Long userId, @RequestParam Long reservationId) {
-        return reservationService.joinToReservation(userId, reservationId)
+    public ResponseEntity<ReservationDto> joinToReservation(@RequestParam String mail, @RequestParam Long reservationId) {
+        return reservationService.joinToReservation(mail, reservationId)
                 .map(ResponseEntity.ok()::body)
                 .orElse(ResponseEntity.badRequest().build());
     }

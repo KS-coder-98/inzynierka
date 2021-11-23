@@ -56,6 +56,16 @@ export let getAllObject = async (setter, url) => {
     });
 };
 
+export let get = async (url) => {
+  const token = getTokenFromStorage();
+  await fetch(url, {
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+      Authorization: token,
+    },
+  });
+};
+
 export let getAllObjectPromise = async (setter, url) => {
   const token = getTokenFromStorage();
   await fetch(url, {

@@ -7,6 +7,7 @@ import java.util.Set;
 
 @Data
 public class ReservationDto {
+    private Long id;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private ConferenceRoomDto conferenceRoom;

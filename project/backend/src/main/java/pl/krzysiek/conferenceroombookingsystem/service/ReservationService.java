@@ -70,8 +70,8 @@ public class ReservationService {
         return reservationRepository.save(reservation);
     }
 
-    public Optional<ReservationDto> joinToReservation(Long userId, Long reservationId) {
-        Optional<User> optionalUser = userRepository.findById(userId);
+    public Optional<ReservationDto> joinToReservation(String mail, Long reservationId) {
+        Optional<User> optionalUser = userRepository.findByEmail(mail);
         Optional<Reservation> optionalReservation = reservationRepository.findById(reservationId);
         if (optionalUser.isEmpty() || optionalReservation.isEmpty()) {
             return Optional.empty();
