@@ -21,7 +21,7 @@ export const SignInButton = () => {
       className="ml-auto"
       onClick={() => handleLogin(instance)}
     >
-      Zalogój się
+      Zaloguj się
     </Button>
   );
 };

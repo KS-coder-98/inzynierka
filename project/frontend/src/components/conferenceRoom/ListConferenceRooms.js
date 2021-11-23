@@ -3,13 +3,7 @@ import { getAllConferenceRooms } from "./ConferenceRoomHelper";
 import ConferenceRoomLayout from "./ConferenceRoomLayout";
 import { Row } from "react-bootstrap";
 
-const ListConferenceRooms = () => {
-  const [conRooms, setConRooms] = useState([]);
-
-  useEffect(() => {
-    getAllConferenceRooms(setConRooms);
-  }, []);
-
+const ListConferenceRooms = ({ conRooms }) => {
   return (
     <div>
       <Row xs={2} md={4} lg={5}>

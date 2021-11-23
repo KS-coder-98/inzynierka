@@ -33,6 +33,7 @@ public class ReservationService {
         }
         ConferenceRoom conferenceRoom = optionalConferenceRoom.get();
         User user = optionalUser.get();
+        reservation.setOrganiser(user);
         boolean isNotOverlapping = conferenceRoom.getReservations().stream()
                 .noneMatch(Reservation.isOverlapping(reservation));
         if (isNotOverlapping) {
@@ -93,6 +94,13 @@ public class ReservationService {
         return user.getReservations().stream()
                 .filter(reservation -> reservation.getStartTime().isAfter(LocalDateTime.now())
                         && reservation.getStartTime().isBefore(LocalDateTime.now().plusDays(3)))
+                .map(reservationMapper::toReservationDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<ReservationDto> getAllReservations() {
+        return reservationRepository.findAll()
+                .stream()
                 .map(reservationMapper::toReservationDto)
                 .collect(Collectors.toList());
     }

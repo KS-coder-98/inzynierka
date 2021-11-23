@@ -51,4 +51,9 @@ public class ReservationController {
                 .orElse(ResponseEntity.badRequest().build());
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<ReservationDto>> getAll() {
+        return ResponseEntity.ok(reservationService.getAllReservations());
+    }
+
 }

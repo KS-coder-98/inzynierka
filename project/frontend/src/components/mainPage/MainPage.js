@@ -16,7 +16,7 @@ const MainPage = () => {
     setTimeout(() => {
       getUserByMail(getEmailFromStorage(), setUser);
       getUserEventsByMail(getEmailFromStorage(), setUncomingEvents);
-    }, 700);
+    }, 250);
   }, []);
 
   return (

@@ -52,7 +52,20 @@ export let getAllObject = async (setter, url) => {
   })
     .then((response) => response.json())
     .then((e) => {
-      console.log(e.content);
+      setter(e);
+    });
+};
+
+export let getAllObjectPromise = async (setter, url) => {
+  const token = getTokenFromStorage();
+  await fetch(url, {
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+      Authorization: token,
+    },
+  })
+    .then((response) => response.json())
+    .then((e) => {
       setter(e.content);
     });
 };

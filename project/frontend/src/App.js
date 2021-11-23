@@ -9,7 +9,7 @@ import React from "react";
 import StartPage from "./components/StartPage/StartPage";
 import MyNavbar from "./components/nav/MyNavbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Meetings from "./components/Meetings";
+import Meetings from "./components/event/Meetings";
 import { useEffect } from "react";
 import { loginRequest } from "./authConfig";
 import {

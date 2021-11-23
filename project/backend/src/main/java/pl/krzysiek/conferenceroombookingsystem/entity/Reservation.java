@@ -27,6 +27,9 @@ public class Reservation implements Comparable<Reservation> {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String name;
+    @OneToOne
+    @JoinColumn(name = "organiser_id")
+    private User organiser;
 
     public static Predicate<Reservation> isOverlapping(Reservation reservation) {
         return r -> r.getStartTime().isBefore(reservation.getEndTime())
