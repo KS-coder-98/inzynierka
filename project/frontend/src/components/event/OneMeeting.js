@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { getEmailFromStorage } from "../../handlerToLocalStorage";
+import ButtonCancelReservation from "../button/ButtonCancelReservation";
 import ButtonJoin from "../button/ButtonJoin";
 import CustomCard from "../mainPage/CustomCard";
 
@@ -72,7 +73,7 @@ const OneMeeting = ({ event }) => {
           <Row>
             <Col style={{ marginTop: "20px" }}>
               {!isOrganiser && isRegistered && (
-                <Button variant="warning">Anuluj udział</Button>
+                <ButtonCancelReservation idEvent={event.id} />
               )}
               {isOrganiser && (
                 <Button variant="danger">Anulaj wydarzenie</Button>

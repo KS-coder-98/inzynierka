@@ -14,4 +14,13 @@ export let joinToEvent = async (idEvent) => {
   await get(url);
 };
 
+export let cancelReservation = async (idEvent) => {
+  let url =
+    "http://localhost:8080/reservation/cancel-reservation/?reservationId=" +
+    idEvent +
+    "&mail=" +
+    getEmailFromStorage();
+  await get(url);
+};
+
 // localhost:8080/reservation/join/?reservationId=2&mail=mail5@wp.pl

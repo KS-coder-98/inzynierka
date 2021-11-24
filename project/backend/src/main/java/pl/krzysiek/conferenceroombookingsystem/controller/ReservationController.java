@@ -51,6 +51,11 @@ public class ReservationController {
                 .orElse(ResponseEntity.badRequest().build());
     }
 
+    @GetMapping("/cancel-reservation")
+    public ResponseEntity<ReservationDto> cancelReservation(@RequestParam String mail, @RequestParam Long reservationId) {
+        return ResponseEntity.ok(reservationService.cancelReservation(mail, reservationId));
+    }
+
     @GetMapping("/all")
     public ResponseEntity<List<ReservationDto>> getAll() {
         return ResponseEntity.ok(reservationService.getAllReservations());

@@ -105,4 +105,14 @@ public class ReservationService {
                 .collect(Collectors.toList());
     }
 
+    public ReservationDto cancelReservation(String mail, Long reservationId) {
+        User user = userRepository.findByEmail(mail).orElseThrow();
+        Reservation reservation = reservationRepository.findById(reservationId).orElseThrow();
+        reservation.getEventMembers().remove(user);
+        user.getReservations().remove(reservation);
+        userRepository.save(user);
+        reservationRepository.save(reservation);
+        return reservationMapper.toReservationDto(reservation);
+    }
+
 }
