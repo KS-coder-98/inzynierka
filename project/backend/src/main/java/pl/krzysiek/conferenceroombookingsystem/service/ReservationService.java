@@ -58,7 +58,6 @@ public class ReservationService {
         var reservationPresent = optionalReservation.isPresent();
         if (reservationPresent) {
             //// TODO: check this
-            var reservation = optionalReservation.get();
             reservationRepository.delete(optionalReservation.get());
             return true;
         }
