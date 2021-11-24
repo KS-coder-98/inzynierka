@@ -57,7 +57,9 @@ public class ReservationService {
         var optionalReservation = reservationRepository.findById(id);
         var reservationPresent = optionalReservation.isPresent();
         if (reservationPresent) {
-            reservationRepository.deleteById(id);
+            //// TODO: check this
+            var reservation = optionalReservation.get();
+            reservationRepository.delete(optionalReservation.get());
             return true;
         }
         return false;

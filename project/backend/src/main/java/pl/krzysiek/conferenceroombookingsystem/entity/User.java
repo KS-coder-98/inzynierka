@@ -35,7 +35,7 @@ public class User {
     private String lastName;
     //todo in liquibase this field is in userContact, and make this not nullable
     private String email;
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL)
     private UserDetails userDetails;
     @OneToOne(cascade = CascadeType.ALL)
     private UserContact userContact;

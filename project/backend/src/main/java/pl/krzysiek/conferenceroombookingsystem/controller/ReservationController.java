@@ -37,9 +37,9 @@ public class ReservationController {
                 .orElse(ResponseEntity.badRequest().build());
     }
 
-    @GetMapping("/delete/{id}")
-    public ResponseEntity<Reservation> deleteReservation(@PathVariable Long id) {
-        return reservationService.deleteReservation(id) ?
+    @GetMapping("/delete")
+    public ResponseEntity<Reservation> deleteReservation(@RequestParam Long reservationId) {
+        return reservationService.deleteReservation(reservationId) ?
                 ResponseEntity.ok().body(null)
                 : ResponseEntity.notFound().build();
     }

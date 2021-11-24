@@ -23,4 +23,10 @@ export let cancelReservation = async (idEvent) => {
   await get(url);
 };
 
+export let deleteReservation = async (idEvent) => {
+  let url =
+    "http://localhost:8080/reservation/delete/?reservationId=" + idEvent;
+  await get(url);
+};
+
 // localhost:8080/reservation/join/?reservationId=2&mail=mail5@wp.pl
