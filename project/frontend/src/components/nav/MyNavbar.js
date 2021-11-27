@@ -24,7 +24,7 @@ const MyNavbar = ({ username }) => {
                 <NavDropdown.Item href="#action/3.2">
                   Dodaj salę
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
+                <NavDropdown.Item href="/conference-room">
                   Edytuj salę
                 </NavDropdown.Item>
                 <NavDropdown.Divider />

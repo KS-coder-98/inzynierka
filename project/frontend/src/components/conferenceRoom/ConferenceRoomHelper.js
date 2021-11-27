@@ -1,4 +1,4 @@
-import { getObjectById, getAllObject } from "../../comunication";
+import { getObjectById, getAllObjectPromise } from "../../comunication";
 
 export let getConferenceRoomById = async (id, setConferenceRoom) => {
   getObjectById(
@@ -9,5 +9,8 @@ export let getConferenceRoomById = async (id, setConferenceRoom) => {
 };
 
 export let getAllConferenceRooms = async (setConferenceRoom) => {
-  getAllObject(setConferenceRoom, "http://localhost:8080/conference-room/");
+  getAllObjectPromise(
+    setConferenceRoom,
+    "http://localhost:8080/conference-room/"
+  );
 };

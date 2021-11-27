@@ -1,16 +1,19 @@
 import React from "react";
-import { Card, ListGroup, Col } from "react-bootstrap";
+import { Card, ListGroup, Col, Button } from "react-bootstrap";
 
 const ConferenceRoomLayout = ({ id, name, description, capacity }) => {
   return (
     <div>
       <Col>
-        <Card style={{ width: "18rem" }}>
+        <Card style={{ width: "18rem", margin: "10px" }}>
           <ListGroup variant="flush">
-            <Card.Header>Name: {name}</Card.Header>
-            <ListGroup.Item>Id: {id}</ListGroup.Item>
-            <ListGroup.Item>Description: {description}</ListGroup.Item>
-            <ListGroup.Item>Capacity: {capacity}</ListGroup.Item>
+            <Card.Header>Nazwa: {name}</Card.Header>
+            <ListGroup.Item>Identyfikator: {id}</ListGroup.Item>
+            <ListGroup.Item>Opis: {description}</ListGroup.Item>
+            <ListGroup.Item>Max liczba osób: {capacity}</ListGroup.Item>
+            <ListGroup.Item>
+              <Button>Szegóły</Button>
+            </ListGroup.Item>
           </ListGroup>
         </Card>
       </Col>
