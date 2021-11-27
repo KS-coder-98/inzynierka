@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
+import { isUserAdmin } from "../../handlerToLocalStorage";
 import { SignOutButton } from "./SignOutButton";
 
 const MyNavbar = ({ username }) => {
+  const [isAdmin, setIsAdmin] = useState(isUserAdmin);
+
   return (
     <Navbar bg="dark" expand="lg" variant="dark">
       <Container>
@@ -12,17 +15,27 @@ const MyNavbar = ({ username }) => {
           <Nav className="me-auto">
             <Nav.Link href="/">Panel główny</Nav.Link>
             <Nav.Link href="/metings">Wydarzenia</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
+            {isAdmin && (
+              <NavDropdown title="Zarządzaj" id="basic-nav-dropdown">
+                <NavDropdown.Item href="#action/3.1">
+                  Dodaj rezerwację
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.2">
+                  Dodaj salę
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">
+                  Edytuj salę
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.3">
+                  Edytuj użytkownika
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">
+                  Dodaj użytkownika
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
           </Nav>
           <Nav>
             <Navbar.Text>
