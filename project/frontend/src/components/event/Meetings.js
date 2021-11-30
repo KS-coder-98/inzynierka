@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
+import MySpinner from "../MySpinner";
 import { getAllEvents } from "./EventHelper";
 import OneMeeting from "./OneMeeting";
 
@@ -30,10 +31,7 @@ const Meetings = () => {
           </Row>
         </Container>
       ) : (
-        <Spinner
-          animation="border"
-          style={{ height: "100px", width: "100px", margin: "100px" }}
-        />
+        <MySpinner />
       )}
     </div>
   );

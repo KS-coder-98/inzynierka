@@ -18,6 +18,8 @@ import {
   setTokenInStorage,
 } from "./handlerToLocalStorage";
 import ListConferenceRooms from "./components/conferenceRoom/ListConferenceRooms";
+import ConferenceRoom from "./components/conferenceRoom/ConferenceRoom";
+
 import { sayHello } from "./comunication";
 import MainPage from "./components/mainPage/MainPage";
 
@@ -66,7 +68,8 @@ const MainContent = () => {
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/metings" element={<Meetings />} />
-            <Route path="/conference-room" element={<ListConferenceRooms />} />
+            <Route path="/conference-rooms" element={<ListConferenceRooms />} />
+            <Route path="/conference-room/:id" element={<ConferenceRoom />} />
           </Routes>
         </Router>
       </AuthenticatedTemplate>

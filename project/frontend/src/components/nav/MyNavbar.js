@@ -4,7 +4,13 @@ import { isUserAdmin } from "../../handlerToLocalStorage";
 import { SignOutButton } from "./SignOutButton";
 
 const MyNavbar = ({ username }) => {
-  const [isAdmin, setIsAdmin] = useState(isUserAdmin);
+  const [isAdmin, setIsAdmin] = useState();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsAdmin(isUserAdmin);
+    }, 150);
+  }, []);
 
   return (
     <Navbar bg="dark" expand="lg" variant="dark">
@@ -15,7 +21,7 @@ const MyNavbar = ({ username }) => {
           <Nav className="me-auto">
             <Nav.Link href="/">Panel główny</Nav.Link>
             <Nav.Link href="/metings">Wydarzenia</Nav.Link>
-            {isAdmin && (
+            {isAdmin === "admin" && (
               <NavDropdown title="Zarządzaj" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">
                   Dodaj rezerwację
@@ -24,7 +30,7 @@ const MyNavbar = ({ username }) => {
                 <NavDropdown.Item href="#action/3.2">
                   Dodaj salę
                 </NavDropdown.Item>
-                <NavDropdown.Item href="/conference-room">
+                <NavDropdown.Item href="/conference-rooms">
                   Edytuj salę
                 </NavDropdown.Item>
                 <NavDropdown.Divider />

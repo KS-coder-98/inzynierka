@@ -11,4 +11,5 @@ public class ConferenceRoomDto {
     private String description;
     private int capacity;
     private Set<EquipmentDto> equipment;
+    private Set<ReservationBasicDto> reservations;
 }

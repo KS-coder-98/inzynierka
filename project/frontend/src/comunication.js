@@ -13,7 +13,6 @@ export let sayHello = async () => {
     getEmailFromStorage() +
     "&nick=" +
     getNickFromStorage();
-  console.log(url);
   await fetch(url, {
     headers: {
       "Content-type": "application/json; charset=UTF-8",
@@ -37,7 +36,6 @@ export let getObjectById = async (id, setter, url) => {
   })
     .then((response) => response.json())
     .then((e) => {
-      console.log(e);
       setter(e);
     });
 };

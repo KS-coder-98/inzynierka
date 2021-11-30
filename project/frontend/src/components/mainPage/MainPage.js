@@ -5,8 +5,9 @@ import { getEmailFromStorage } from "../../handlerToLocalStorage";
 import InfoUserDetails from "./InfoUserDetails";
 import InfoUserContact from "./InfoUserContact";
 import InfoUser from "./InfoUser";
-import { Row, Col, Spinner, Container } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 import InfoUpcomingEvents from "./InfoUpcomingEvents";
+import MySpinner from "../MySpinner";
 
 const MainPage = () => {
   const [user, setUser] = useState();
@@ -41,10 +42,7 @@ const MainPage = () => {
           </Row>
         </Container>
       ) : (
-        <Spinner
-          animation="border"
-          style={{ height: "100px", width: "100px", margin: "100px" }}
-        />
+        <MySpinner />
       )}
     </div>
   );
