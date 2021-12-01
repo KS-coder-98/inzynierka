@@ -40,19 +40,25 @@ VALUES ('Lódź', 2, '+48', '506304507', '05-120', 'Wysoka', 2),
        ('Warszawa', 12, '+48', '506304507', '05-120', 'Karetowa', 25),
        ('Poznań', 12, '+48', '506304507', '05-120', 'Wysoka', 27),
        ('Lódź', 12, '+48', '506304507', '05-120', 'Karetowa', 22),
+       ('Lódź', 15, '+48', '506304507', '05-120', 'Wysoka', 23),
+       ('Warszawa', 13, '+48', '506304507', '05-120', 'Waska', 42),
        ('Lódź', 12, '+48', '506304507', '05-120', 'Waska', 23);
 
 INSERT INTO conference_rooms_booking.user_details (date_of_birth, type_of_members)
-VALUES ('2021-10-29', 'normal'),
-       ('2000-11-20', 'normal'),
-       ('1998-11-12', 'normal'),
-       ('2001-03-13', 'normal'),
-       ('2002-03-15', 'normal'),
-       ('2002-04-17', 'normal'),
-       ('2003-10-18', 'normal'),
-       ('1983-03-20', 'normal'),
-       ('1992-10-22', 'normal'),
-       ('1990-11-23', 'normal');
+VALUES ('2021-10-29', 'USER'),
+       ('2000-11-20', 'USER'),
+       ('1998-11-12', 'USER'),
+       ('2001-03-13', 'USER'),
+       ('2002-03-15', 'USER'),
+       ('2002-04-17', 'USER'),
+       ('2003-10-18', 'USER'),
+       ('1983-03-20', 'USER'),
+       ('1992-10-22', 'USER'),
+       ('1990-11-23', 'USER'),
+       ('1995-12-16', 'USER'),
+       ('1998-12-17', 'ADMIN');
+
+
 
 INSERT INTO conference_rooms_booking.user (email, first_name, last_name, nick, user_contact_id, user_details_id)
 VALUES ('mail1@wp.pl', 'Piotr', 'Nowak', 'pnowy', 1, 1),
@@ -64,4 +70,16 @@ VALUES ('mail1@wp.pl', 'Piotr', 'Nowak', 'pnowy', 1, 1),
        ('mail7@wp.pl', 'Bartłomiej', 'Wilk', 'pnowy', 7, 7),
        ('mail8@wp.pl', 'Arek', 'Nowak', 'pnowy', 8, 8),
        ('mail9@wp.pl', 'Piotr', 'Kozłowki', 'pnowy', 9, 9),
-       ('mail10@wp.pl', 'Angelika', 'Nowak', 'pnowy', 10, 10);
+       ('mail10@wp.pl', 'Angelika', 'Nowak', 'pnowy', 10, 10),
+       ('user1@conferenceroombooking.onmicrosoft.com', 'Marek', 'Supeł', 'user1', 14, 11),
+       ('JanKowalski@conferenceroombooking.onmicrosoft.com', 'Jan', 'Kowalski', 'Jan', 15, 12);
+
+
+INSERT INTO conference_rooms_booking.reservation (id, end_time, name, start_time, conference_room_id, organiser_id)
+VALUES (1, '2021-11-23 12:15:00', 'Konferencja o kwiatach', '2021-11-23 12:10:00', 1, 1),
+       (2, '2021-11-23 12:25:00', 'AI -czy to jest przyszłość?', '2021-11-23 16:00:00', 2, 2),
+       (3, '2021-11-24 11:00:00', 'Innowacje w przemyśle', '2021-11-24 15:00:00', 2, 3),
+       (4, '2021-11-26 14:00:00', 'Hybryda, czy to się opłaca', '2021-11-26 18:00:00', 1, 5),
+       (5, '2021-11-23 11:10:00', 'Uprawy ekologiczne', '2021-11-23 14:00:00', 3, 7),
+       (6, '2021-11-25 11:00:00', 'Wstęp do javy 13', '2021-11-25 15:00:00', 5, 4),
+       (7, '2021-11-23 19:15:00', 'Konferencja o kwiatach', '2021-11-23 17:10:00', 1, 11);
