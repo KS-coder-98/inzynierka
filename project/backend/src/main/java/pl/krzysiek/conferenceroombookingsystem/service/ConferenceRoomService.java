@@ -35,7 +35,7 @@ public class ConferenceRoomService {
         return conferenceRoomMapper.toConferenceRoomDto(conferenceRoomRepository.save(conferenceRoom));
     }
 
-    public Optional<ConferenceRoomDto> update(ConferenceRoom room) {
+    public Optional<ConferenceRoomDto> update(ConferenceRoomDto room) {
         conferenceRoomRepository.setConferenceRoomById(room.getName(), room.getDescription(),
                 room.getCapacity(), room.getId());
         return conferenceRoomRepository.findById(room.getId())

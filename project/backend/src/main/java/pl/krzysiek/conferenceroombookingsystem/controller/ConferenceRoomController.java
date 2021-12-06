@@ -34,8 +34,8 @@ public class ConferenceRoomController {
         return new ResponseEntity<>(conferenceRoomService.create(conferenceRoom), HttpStatus.CREATED);
     }
 
-    @GetMapping("/update")
-    public ResponseEntity<ConferenceRoomDto> updateConferenceRoom(@RequestBody ConferenceRoom room) {
+    @PutMapping("/update")
+    public ResponseEntity<ConferenceRoomDto> updateConferenceRoom(@RequestBody ConferenceRoomDto room) {
         return conferenceRoomService.update(room)
                 .map(ResponseEntity.ok()::body)
                 .orElse(ResponseEntity.notFound().build());

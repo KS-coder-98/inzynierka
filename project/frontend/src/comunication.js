@@ -91,3 +91,15 @@ export let getObjectBySthAsParam = async (nameId, id, setter, url) => {
       setter(e);
     });
 };
+
+export let updateObj = async (url, obj) => {
+  const token = getTokenFromStorage();
+  await fetch(url, {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+      Authorization: token,
+    },
+    body: JSON.stringify(obj),
+  });
+};
