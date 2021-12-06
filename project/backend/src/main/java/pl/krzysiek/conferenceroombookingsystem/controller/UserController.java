@@ -43,8 +43,8 @@ public class UserController {
         return ResponseEntity.ok(userService.isAdmin(mail));
     }
 
-    @GetMapping("/update")
-    public ResponseEntity<User> updateUser(@RequestBody User user) {
+    @PutMapping("/update")
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto user) {
         return userService.updateUser(user)
                 .map(ResponseEntity.ok()::body)
                 .orElse(ResponseEntity.notFound().build());

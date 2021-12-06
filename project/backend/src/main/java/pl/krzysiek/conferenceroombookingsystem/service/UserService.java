@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import pl.krzysiek.conferenceroombookingsystem.dto.UserDto;
 import pl.krzysiek.conferenceroombookingsystem.entity.User;
 import pl.krzysiek.conferenceroombookingsystem.entity.UserContact;
 import pl.krzysiek.conferenceroombookingsystem.entity.UserDetails;
+import pl.krzysiek.conferenceroombookingsystem.mapper.UserMapper;
 import pl.krzysiek.conferenceroombookingsystem.repository.UserContactRepository;
 import pl.krzysiek.conferenceroombookingsystem.repository.UserDetailsRepository;
 import pl.krzysiek.conferenceroombookingsystem.repository.UserRepository;
@@ -20,6 +22,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserContactRepository userContactRepository;
     private final UserDetailsRepository userDetailsRepository;
+    private final UserMapper userMapper;
 
     public void createUser(String mail, String nick) {
         if (userRepository.existsByEmail(mail) && userRepository.existsByNick(nick)) {
@@ -48,9 +51,9 @@ public class UserService {
         return userRepository.findAll(pageable);
     }
 
-    public Optional<User> updateUser(User user) {
+    public Optional<UserDto> updateUser(UserDto user) {
         userRepository.setUserById(user.getNick(), user.getFirstName(), user.getLastName(), user.getId());
-        return userRepository.findById(user.getId());
+        return userRepository.findById(user.getId()).map(userMapper::toUserDto);
     }
 
     public boolean isAdmin(String mail) {
