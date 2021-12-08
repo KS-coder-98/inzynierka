@@ -10,6 +10,7 @@ import pl.krzysiek.conferenceroombookingsystem.dto.EquipmentDto;
 import pl.krzysiek.conferenceroombookingsystem.entity.Equipment;
 import pl.krzysiek.conferenceroombookingsystem.mapper.EquipmentMapper;
 import pl.krzysiek.conferenceroombookingsystem.repository.EquipmentRepository;
+import pl.krzysiek.conferenceroombookingsystem.service.EquipmentService;
 
 import java.util.Optional;
 
@@ -20,6 +21,7 @@ public class EquipmentController {
 
     private final EquipmentRepository equipmentRepository;
     private final EquipmentMapper equipmentMapper;
+    private final EquipmentService equipmentService;
 
     @GetMapping("/{id}")
     public ResponseEntity<EquipmentDto> one(@PathVariable Long id) {
@@ -41,15 +43,10 @@ public class EquipmentController {
         return new ResponseEntity<>(equipmentMapper.toEquipmentDto(equipment1), HttpStatus.CREATED);
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<EquipmentDto> deleteEquipment(@PathVariable Long id) {
-        var optionalEquipment = equipmentRepository.findById(id);
-        var equipmentPresent = optionalEquipment.isPresent();
-        if (equipmentPresent) {
-            equipmentRepository.deleteById(id);
-            return ResponseEntity.ok().body(null);
-        }
-        return ResponseEntity.notFound().build();
+        equipmentService.deleteById(id);
+        return ResponseEntity.ok().body(null);
     }
 
     @GetMapping("/update")

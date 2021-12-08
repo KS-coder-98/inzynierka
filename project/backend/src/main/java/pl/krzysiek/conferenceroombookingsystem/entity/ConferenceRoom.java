@@ -17,8 +17,12 @@ public class ConferenceRoom {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "conference_room_id")
     Set<Equipment> equipment = new HashSet<>();
+
+
     @OneToMany(mappedBy = "conferenceRoom", cascade = CascadeType.REMOVE)
     Set<Reservation> reservations = new HashSet<>();
+
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

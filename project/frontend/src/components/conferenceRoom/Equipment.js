@@ -1,9 +1,15 @@
 import React from "react";
 import CustomCard from "../mainPage/CustomCard";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Button } from "react-bootstrap";
 import { Pen, XLg } from "react-bootstrap-icons";
+import { deleteEquipment } from "./ConferenceRoomHelper";
 
 const Equipment = ({ id, name, desc }) => {
+  const clickHandler = () => {
+    deleteEquipment(id);
+    window.location.reload();
+  };
+
   return (
     <div>
       <CustomCard
@@ -22,10 +28,14 @@ const Equipment = ({ id, name, desc }) => {
             </Row>
             <Row>
               <Col>
-                <Pen />
+                <Button variant="outline-warning">
+                  <Pen />
+                </Button>
               </Col>
               <Col>
-                <XLg />
+                <Button variant="outline-danger" onClick={clickHandler}>
+                  <XLg />
+                </Button>
               </Col>
             </Row>
           </>
