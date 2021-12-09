@@ -49,7 +49,7 @@ public class EquipmentController {
         return ResponseEntity.ok().body(null);
     }
 
-    @GetMapping("/update")
+    @PutMapping
     public ResponseEntity<EquipmentDto> update(@RequestBody Equipment equipment) {
         Optional<Equipment> byId = equipmentRepository.findById(equipment.getId());
         if (byId.isEmpty()) {

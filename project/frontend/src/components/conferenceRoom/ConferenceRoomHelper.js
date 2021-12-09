@@ -27,3 +27,7 @@ export let updateConferenceRoom = async (conferenceRoom) => {
 export let deleteEquipment = async (eqId) => {
   deleteObj("http://localhost:8080/equipment" + "/" + eqId);
 };
+
+export let updateEquipment = async (equipment) => {
+  updateObj("http://localhost:8080/equipment", equipment);
+};
