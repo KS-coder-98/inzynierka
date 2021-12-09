@@ -43,7 +43,10 @@ const ConferenceRoom = () => {
           <Row>
             <h2>Wyposarzenie</h2>
             {conRoom.equipment.map((equipment) => (
-              <Col style={{ margin: "30px 0", fontSize: "18px" }}>
+              <Col
+                key={equipment.id}
+                style={{ margin: "30px 0", fontSize: "18px" }}
+              >
                 <Equipment
                   key={equipment.id}
                   id={equipment.id}
