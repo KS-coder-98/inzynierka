@@ -2,6 +2,7 @@ import {
   getObjectById,
   getAllObjectPromise,
   updateObj,
+  deleteObj,
 } from "../../comunication";
 
 export let getConferenceRoomById = async (id, setConferenceRoom) => {
@@ -21,4 +22,8 @@ export let getAllConferenceRooms = async (setConferenceRoom) => {
 
 export let updateConferenceRoom = async (conferenceRoom) => {
   updateObj("http://localhost:8080/conference-room/update", conferenceRoom);
+};
+
+export let deleteEquipment = async (eqId) => {
+  deleteObj("http://localhost:8080/equipment" + "/" + eqId);
 };

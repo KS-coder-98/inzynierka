@@ -103,3 +103,14 @@ export let updateObj = async (url, obj) => {
     body: JSON.stringify(obj),
   });
 };
+
+export let deleteObj = async (url) => {
+  const token = getTokenFromStorage();
+  await fetch(url, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+      Authorization: token,
+    },
+  });
+};
