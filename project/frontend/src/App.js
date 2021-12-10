@@ -22,6 +22,8 @@ import ConferenceRoom from "./components/conferenceRoom/ConferenceRoom";
 
 import { sayHello } from "./comunication";
 import MainPage from "./components/mainPage/MainPage";
+import ReservationPage from "./components/reservation/ReservationPage";
+import ListRoomsToReservation from "./components/reservation/ListRoomsToReservation";
 
 /**
  * Renders information about the signed-in user or a button to retrieve data about the user
@@ -70,6 +72,8 @@ const MainContent = () => {
             <Route path="/metings" element={<Meetings />} />
             <Route path="/conference-rooms" element={<ListConferenceRooms />} />
             <Route path="/conference-room/:id" element={<ConferenceRoom />} />
+            <Route path="/reservations" element={<ListRoomsToReservation />} />
+            <Route path="/reservation/:id" element={<ReservationPage />} />
           </Routes>
         </Router>
       </AuthenticatedTemplate>
