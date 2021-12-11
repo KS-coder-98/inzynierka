@@ -28,16 +28,16 @@ public class ReservationController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping
+    @PutMapping
     public ResponseEntity<ReservationDto> addReservation(@RequestParam Long conferenceRoomId,
-                                                         @RequestParam Long organiserId,
+                                                         @RequestParam String mail,
                                                          @RequestBody Reservation reservation) {
-        return reservationService.addReservation(conferenceRoomId, organiserId, reservation)
+        return reservationService.addReservation(conferenceRoomId, mail, reservation)
                 .map(ResponseEntity.ok()::body)
                 .orElse(ResponseEntity.badRequest().build());
     }
 
-    @GetMapping("/delete")
+    @DeleteMapping
     public ResponseEntity<Reservation> deleteReservation(@RequestParam Long reservationId) {
         return reservationService.deleteReservation(reservationId) ?
                 ResponseEntity.ok().body(null)

@@ -2,7 +2,11 @@ import * as React from "react";
 import Paper from "@material-ui/core/Paper";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
-import { ViewState, EditingState } from "@devexpress/dx-react-scheduler";
+import {
+  ViewState,
+  EditingState,
+  IntegratedEditing,
+} from "@devexpress/dx-react-scheduler";
 import {
   Scheduler,
   WeekView,
@@ -18,10 +22,13 @@ import {
 import { useParams } from "react-router-dom";
 
 import { getTokenFromStorage } from "../../handlerToLocalStorage";
+import { addReservation, deleteReservation } from "../event/EventHelper";
 
 const ReservationPage = () => {
   // Get ID from URL
   const conferenceRoomId = useParams().id;
+
+  const [fetchData, setFetchData] = React.useState(0);
   const [roomName, setRoomName] = React.useState("");
   const getData = (setData, setLoading) => {
     const url = "http://localhost:8080/conference-room/" + conferenceRoomId;
@@ -71,8 +78,8 @@ const ReservationPage = () => {
 
   const mapAppointmentData = (appointment) => ({
     title: appointment.name,
-    endDate: new Date(Date.parse(appointment.startTime)),
-    startDate: new Date(Date.parse(appointment.endTime)),
+    startDate: new Date(Date.parse(appointment.startTime)),
+    endDate: new Date(Date.parse(appointment.endTime)),
     id: appointment.id,
   });
 
@@ -135,7 +142,59 @@ const ReservationPage = () => {
 
   React.useEffect(() => {
     getData(setData, setLoading);
-  }, [setData, currentViewName, currentDate]);
+  }, [setData, currentViewName, currentDate, fetchData]);
+
+  const commitChanges = ({ added, changed, deleted }) => {
+    if (added) {
+      const newReservation = {
+        name: added.title,
+        startTime: added.startDate,
+        endTime: added.endDate,
+      };
+      addReservation(conferenceRoomId, newReservation);
+      // console.log(newReservation);
+      setTimeout(() => setFetchData(fetchData + 1), 200);
+    }
+    if (changed) {
+      console.log(changed);
+    }
+    if (deleted) {
+      deleteReservation(deleted);
+      setTimeout(() => setFetchData(fetchData + 1), 200);
+    }
+  };
+
+  const BasicLayout = ({ onFieldChange, appointmentData, ...restProps }) => {
+    const onCustomFieldChange = (nextValue) => {
+      onFieldChange({ customField: nextValue });
+    };
+
+    return (
+      <AppointmentForm.BasicLayout
+        appointmentData={appointmentData}
+        onFieldChange={onFieldChange}
+        {...restProps}
+      >
+        <AppointmentForm.Label text="Custom Field" type="title" />
+        <AppointmentForm.TextEditor
+          value={appointmentData.customField}
+          onValueChange={onCustomFieldChange}
+          placeholder="Custom field"
+        />
+      </AppointmentForm.BasicLayout>
+    );
+  };
+
+  const TextEditor = (props) => {
+    // eslint-disable-next-line react/destructuring-assignment
+    if (props.type === "multilineTextEditor") {
+      return null;
+    }
+    return <AppointmentForm.TextEditor {...props} />;
+  };
+  const messages = {
+    moreInformationLabel: "",
+  };
 
   return (
     <Paper>
@@ -147,6 +206,8 @@ const ReservationPage = () => {
           onCurrentViewNameChange={setCurrentViewName}
           onCurrentDateChange={setCurrentDate}
         />
+        <EditingState onCommitChanges={commitChanges} />
+        <IntegratedEditing />
         <DayView startDayHour={7.5} endDayHour={17.5} />
         <WeekView startDayHour={7.5} endDayHour={17.5} />
         <Appointments />
@@ -157,7 +218,7 @@ const ReservationPage = () => {
         <TodayButton />
         <ViewSwitcher />
         <AppointmentTooltip showOpenButton showCloseButton />
-        <AppointmentForm />
+        <AppointmentForm textEditorComponent={TextEditor} messages={messages} />
       </Scheduler>
     </Paper>
   );

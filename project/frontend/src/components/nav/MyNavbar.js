@@ -23,7 +23,7 @@ const MyNavbar = ({ username }) => {
             <Nav.Link href="/metings">Wydarzenia</Nav.Link>
             {isAdmin === "admin" && (
               <NavDropdown title="Zarządzaj" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">
+                <NavDropdown.Item href="/reservations">
                   Dodaj rezerwację
                 </NavDropdown.Item>
                 <NavDropdown.Divider />

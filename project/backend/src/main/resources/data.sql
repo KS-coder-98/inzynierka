@@ -77,8 +77,8 @@ VALUES ('mail1@wp.pl', 'Piotr', 'Nowak', 'pnowy', 1, 1),
 
 INSERT INTO conference_rooms_booking.reservation (id, end_time, name, start_time, conference_room_id, organiser_id)
 VALUES (1, '2021-11-23 12:15:00', 'Konferencja o kwiatach', '2021-11-23 12:10:00', 1, 1),
-       (2, '2021-11-23 12:25:00', 'AI -czy to jest przyszłość?', '2021-11-23 16:00:00', 2, 2),
-       (3, '2021-11-24 11:00:00', 'Innowacje w przemyśle', '2021-11-24 15:00:00', 2, 3),
+       (2, '2021-11-23 16:25:00', 'AI -czy to jest przyszłość?', '2021-11-23 11:00:00', 2, 2),
+       (3, '2021-11-24 15:00:00', 'Innowacje w przemyśle', '2021-11-24 11:00:00', 2, 3),
        (4, '2021-11-26 14:00:00', 'Hybryda, czy to się opłaca', '2021-11-26 18:00:00', 1, 5),
        (5, '2021-11-23 11:10:00', 'Uprawy ekologiczne', '2021-11-23 14:00:00', 3, 7),
        (6, '2021-11-25 11:00:00', 'Wstęp do javy 13', '2021-11-25 15:00:00', 5, 4),

@@ -25,10 +25,10 @@ public class ReservationService {
     private final UserRepository userRepository;
     private final ReservationMapper reservationMapper;
 
-    public Optional<ReservationDto> addReservation(Long conferenceRoomId, Long organiserId, Reservation reservation) {
-        Optional<User> optionalUser = userRepository.findById(organiserId);
+    public Optional<ReservationDto> addReservation(Long conferenceRoomId, String mail, Reservation reservation) {
+        Optional<User> optionalUser = userRepository.findByEmail(mail);
         Optional<ConferenceRoom> optionalConferenceRoom = conferenceRoomRepository.findById(conferenceRoomId);
-        if (optionalUser.isEmpty() || optionalConferenceRoom.isEmpty() || !reservation.isValid()) {
+        if (optionalUser.isEmpty() || optionalConferenceRoom.isEmpty()) {
             return Optional.empty();
         }
         ConferenceRoom conferenceRoom = optionalConferenceRoom.get();
@@ -57,7 +57,11 @@ public class ReservationService {
         var optionalReservation = reservationRepository.findById(id);
         var reservationPresent = optionalReservation.isPresent();
         if (reservationPresent) {
-            //// TODO: check this
+            optionalReservation.get().getEventMembers().forEach(user -> {
+                user.getMyReservations().remove(optionalReservation.get());
+                userRepository.save(user);
+            });
+            optionalReservation.get().getEventMembers().clear();
             reservationRepository.delete(optionalReservation.get());
             return true;
         }
