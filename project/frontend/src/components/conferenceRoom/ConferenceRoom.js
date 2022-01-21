@@ -41,7 +41,7 @@ const ConferenceRoom = () => {
 
         {conRoom.equipment && (
           <Row>
-            <h2>Wyposarzenie</h2>
+            <h2>Wyposażenie</h2>
             {conRoom.equipment.map((equipment) => (
               <Col
                 key={equipment.id}

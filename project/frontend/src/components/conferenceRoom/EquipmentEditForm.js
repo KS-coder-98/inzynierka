@@ -45,7 +45,7 @@ const EquipmentEditForm = ({ equipment, edit, setEdit }) => {
           </Col>
           <Col>
             <Button variant="danger" onClick={editHandler}>
-              Anulaj
+              Anuluj
             </Button>
           </Col>
         </Row>

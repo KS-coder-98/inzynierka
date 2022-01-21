@@ -10,7 +10,7 @@ const ButtonDeleteReservation = ({ idEvent }) => {
   return (
     <div>
       <Button variant="danger" onClick={clickHandler}>
-        Anulaj wydarzenie
+        Anuluj wydarzenie
       </Button>
     </div>
   );
